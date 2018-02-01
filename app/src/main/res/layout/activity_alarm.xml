@@ -8,5 +8,10 @@
         android:background="#8FD2CA"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btn_test_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 </LinearLayout>

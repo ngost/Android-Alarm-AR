@@ -1,12 +1,15 @@
 package eu.kudan.ar;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import static eu.kudan.ar.LogoActivity.MY_PERMISSIONS_REQUEST_CAMERA;
 
@@ -19,6 +22,15 @@ public class AlarmActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_alarm);
         permissionCheck();
+
+        Button btn = (Button) findViewById(R.id.btn_test_);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AlarmActivity.this,ThirdActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void permissionCheck(){

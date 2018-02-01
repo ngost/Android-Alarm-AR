@@ -22,7 +22,12 @@ import eu.kudan.kudan.ARGyroPlaceManager;
 import eu.kudan.kudan.ARImageNode;
 import eu.kudan.kudan.ARImageTrackable;
 import eu.kudan.kudan.ARImageTracker;
+import eu.kudan.kudan.ARLightMaterial;
+import eu.kudan.kudan.ARMeshNode;
+import eu.kudan.kudan.ARModelImporter;
+import eu.kudan.kudan.ARModelNode;
 import eu.kudan.kudan.ARNode;
+import eu.kudan.kudan.ARTexture2D;
 
 import static android.os.Environment.DIRECTORY_DCIM;
 
@@ -72,13 +77,33 @@ public class ThirdActivity extends ARActivity implements ARArbiTrackListener{
         //imageNode = new ARImageNode("Kudan Cow.png");
         imageNode = new ARImageNode();
         imageNode.initWithPath("/mnt/sdcard/DCIM/kudan/mushroom.png");
-        imageNode.setName("Cow");
+        //imageNode.setName("Cow");
         imageNode.rotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
-        imageNode.rotateByDegrees(180.0f, 0.0f, 1.0f, 0.0f);
+        imageNode.rotateByDegrees(180.0f, 0.0f, 100.0f, 0.0f);
         //트래커 객체생성
         // Add the image node as a child of the trackable's world
         //마커이미지를 getWorld한 뒤, addChild로 이미지 노드 add
-        imageTrackable.getWorld().addChild(imageNode);
+
+        /* 모델 파일 테스트 */
+        ARModelImporter arModelImporter = new ARModelImporter();
+        arModelImporter.loadFromAsset("ben.jet");
+        ARModelNode node3d = arModelImporter.getNode();
+        node3d.setName("Cow");
+        node3d.rotateByDegrees(90.0f,1.0f,0.0f,0.0f);
+        node3d.rotateByDegrees(180.0f,1.0f,100.0f,0.0f);
+        ARTexture2D texture2D = new ARTexture2D();
+        texture2D.loadFromAsset("bigBenTexture.png");
+        ARLightMaterial material = new ARLightMaterial();
+        material.setTexture(texture2D);
+   //     material.setColour(1,1,1);
+        material.setAmbient(0.8f,0.8f,0.8f);
+
+        for(ARMeshNode meshNode : arModelImporter.getMeshNodes()){
+            meshNode.setMaterial(material);
+        }
+        node3d.scaleByUniform(0.12f);
+
+        imageTrackable.getWorld().addChild(node3d);
 
 
 
@@ -100,15 +125,15 @@ public class ThirdActivity extends ARActivity implements ARArbiTrackListener{
         if (firstRun)
         {
             ARImageTrackable legoTrackable = ARImageTracker.getInstance().findTrackable("Lego Marker");
-            ARImageNode cowNode = (ARImageNode) legoTrackable.getWorld().findChildByName("Cow");
+            ARModelNode cowNode = (ARModelNode) legoTrackable.getWorld().findChildByName("Cow");
             ARArbiTrack arbiTrack = ARArbiTrack.getInstance();
           //  arbiTrack.initialise();//??
 
             Quaternion cowFullOrientation = cowNode.getWorld().getWorldOrientation().mult(cowNode.getWorldOrientation());
             cowNode.setOrientation(arbiTrack.getWorld().getOrientation().inverse().mult(cowFullOrientation));
             cowNode.remove();
-            cowNode.rotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
-            cowNode.rotateByDegrees(180.0f, 0.0f, 1.0f, 0.0f);
+            //cowNode.rotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
+            //cowNode.rotateByDegrees(180.0f, 0.0f, 1.0f, 0.0f);
             arbiTrack.getWorld().addChild(cowNode);
             firstRun = false;
         }
@@ -145,7 +170,7 @@ public class ThirdActivity extends ARActivity implements ARArbiTrackListener{
             Log.d("F","ARArbiTrack started");
         }
         else {
-            ARImageNode cowNode = (ARImageNode) arbiTrack.getWorld().findChildByName("Cow");
+            ARModelNode cowNode = (ARModelNode) arbiTrack.getWorld().findChildByName("Cow");
             arbiTrack.stop();
             Log.d("H","arbitrack stopped");
             if (cowNode != null)//추가 모르겠다...
