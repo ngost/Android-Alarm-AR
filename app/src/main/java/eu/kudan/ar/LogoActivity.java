@@ -24,7 +24,7 @@ import eu.kudan.kudan.ARAPIKey;
 
 public class LogoActivity extends Activity {
 
-final static int MY_PERMISSIONS_REQUEST_CAMERA = 0;
+
     Animation logo_animation;
     ImageView logo;
     LinearLayout lin2;

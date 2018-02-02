@@ -33,10 +33,11 @@
             android:name=".SecondActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="fullSensor" />
+
         <activity
             android:name=".ThirdActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="fullSensor"></activity>
+            android:screenOrientation="landscape"/>
 
         <activity
             android:name=".AlarmActivity"
