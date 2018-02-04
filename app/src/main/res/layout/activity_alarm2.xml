@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eu.kudan.ar.AlarmActivity">
+    tools:context="eu.kudan.ar.AlarmActivity2">
     <LinearLayout
         android:background="#8FD2CA"
         android:layout_width="match_parent"
