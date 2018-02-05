@@ -3,9 +3,9 @@
     <color name="holo_blue_light">#ff33b5e5</color>
 
     <!-- Math Alarm Activity -->
-    <string name="app_name">Alarm Clock</string>
+    <string name="app_name">일어나</string>
     <string name="title_activity_set_alarms">Set Alarm</string>
-    <string name="no_alarms">No alarms have been set</string>
+    <string name="no_alarms">설정된 알람이 없어요!</string>
 
     <string name="button_new">New</string>
 
@@ -38,4 +38,8 @@
     <string name="button_delete">Delete</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="permissionDeninedMsg">거절하신 권한이 있어요. 앱 동작에 문제가 있을 수 있답니다... ㅠ</string>
+    <string name="permissionAccepted">권한을 승인하셨네요!</string>
+    <string name="marker_generate_msg1">마커가 등록되어있지 않습니다.\n마커를 등록 해주세요.</string>
+    <string name="marker_generate_msg2">마커가 등록되었습니다.\n(프리뷰 보기)</string>
 </resources>

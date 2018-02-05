@@ -23,13 +23,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     <item
         android:id="@+id/menu_item_save"
         android:title="@string/menu_item_save"
-        android:icon="@drawable/glyphicons_443_floppy_disk"
+        android:icon="@drawable/glyphicons_confirm"
         appcompat:showAsAction="always">
     </item>
     <item
         android:id="@+id/menu_item_delete"
         android:title="@string/menu_item_delete"
-        android:icon="@drawable/glyphicons_016_bin"
+        android:icon="@drawable/remove"
         appcompat:showAsAction="always">
     </item>    
     <item

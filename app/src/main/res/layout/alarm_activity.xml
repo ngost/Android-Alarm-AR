@@ -16,8 +16,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#E0F7FA"
     tools:context=".AlarmActivity" >
-
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/no_alarms" />
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
@@ -25,11 +36,46 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:longClickable="true" >
     </ListView>
 
-    <TextView
-        android:id="@android:id/empty"
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/no_alarms" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/marker_status_text"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:padding="3dp"
+                android:textSize="17dp"
+                android:text="@string/marker_generate_msg1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp">
+
+            <ImageButton
+                android:id="@+id/marker_generate_btn"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:background="@drawable/marker_btn_drawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

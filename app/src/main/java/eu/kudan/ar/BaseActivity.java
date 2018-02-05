@@ -74,7 +74,7 @@ public abstract class BaseActivity  extends ActionBarActivity implements android
 			}
 			break;
 		case R.id.menu_item_website:
-			url = "http://www.neilson.co.za";
+			url = "http://ngost.tistory.com";
 			intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
 			try {
@@ -85,7 +85,7 @@ public abstract class BaseActivity  extends ActionBarActivity implements android
 			break;
 		case R.id.menu_item_report:
 			
-			url = "https://github.com/SheldonNeilson/Android-Alarm-Clock/issues";
+			url = "http://ngost.tistory.com";
 			intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
 			try {

@@ -302,6 +302,7 @@ public class AlarmPreferencesActivity extends BaseActivity {
 				Database.create(getMathAlarm());
 			} else {
 				Database.update(getMathAlarm());
+
 			}
 			callMathAlarmScheduleService();
 			Toast.makeText(AlarmPreferencesActivity.this, getMathAlarm().getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG).show();
@@ -309,15 +310,16 @@ public class AlarmPreferencesActivity extends BaseActivity {
 			break;
 		case R.id.menu_item_delete:
 			AlertDialog.Builder dialog = new AlertDialog.Builder(AlarmPreferencesActivity.this);
-			dialog.setTitle("Delete");
-			dialog.setMessage("Delete this alarm?");
-			dialog.setPositiveButton("Ok", new OnClickListener() {
+			dialog.setTitle("삭제");
+			dialog.setMessage("알람을 삭제하시겠어요?");
+			dialog.setPositiveButton("예", new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 
 					Database.init(getApplicationContext());
 					if (getMathAlarm().getId() < 1) {
+
 						// Alarm not saved
 					} else {
 						Database.deleteEntry(alarm);
@@ -326,7 +328,7 @@ public class AlarmPreferencesActivity extends BaseActivity {
 					finish();
 				}
 			});
-			dialog.setNegativeButton("Cancel", new OnClickListener() {
+			dialog.setNegativeButton("아니오", new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

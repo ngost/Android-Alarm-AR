@@ -86,7 +86,7 @@ public class Alarm implements Serializable {
 	private Day[] days = {Day.MONDAY,Day.TUESDAY,Day.WEDNESDAY,Day.THURSDAY,Day.FRIDAY,Day.SATURDAY,Day.SUNDAY};	
 	private String alarmTonePath = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString();
 	private Boolean vibrate = true;
-	private String alarmName = "Alarm Clock";
+	private String alarmName = "기본 알람";
 	private Difficulty difficulty = Difficulty.EASY;
 	
 	public Alarm() {
@@ -278,7 +278,7 @@ public class Alarm implements Serializable {
 	public String getRepeatDaysString() {
 		StringBuilder daysStringBuilder = new StringBuilder();
 		if(getDays().length == Day.values().length){
-			daysStringBuilder.append("Every Day");		
+			daysStringBuilder.append("매일");
 		}else{
 			Arrays.sort(getDays(), new Comparator<Day>() {
 				@Override
@@ -327,21 +327,21 @@ public class Alarm implements Serializable {
 		long hours = timeDifference / (1000 * 60 * 60) - (days * 24);
 		long minutes = timeDifference / (1000 * 60) - (days * 24 * 60) - (hours * 60);
 		long seconds = timeDifference / (1000) - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
-		String alert = "Alarm will sound in ";
+		String alert = "알람이 ";
 		if (days > 0) {
 			alert += String.format(
-					"%d days, %d hours, %d minutes and %d seconds", days,
+					"%d 일 %d 시간 %d 분 %d 초 후에 울립니다.", days,
 					hours, minutes, seconds);
 		} else {
 			if (hours > 0) {
-				alert += String.format("%d hours, %d minutes and %d seconds",
+				alert += String.format("%d 시간 %d 분 %d 초 후에 울립니다.",
 						hours, minutes, seconds);
 			} else {
 				if (minutes > 0) {
-					alert += String.format("%d minutes, %d seconds", minutes,
+					alert += String.format("%d 분 %d 초 후에 울립니다.", minutes,
 							seconds);
 				} else {
-					alert += String.format("%d seconds", seconds);
+					alert += String.format("%d 초 후에 울립니다.", seconds);
 				}
 			}
 		}
