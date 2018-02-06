@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="eu.kudan.ar">
+    package="com.ngost.easyjin">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,22 +8,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/my_launcher_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/my_launcher_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="fullSensor" />
         <activity
             android:name=".LogoActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
@@ -33,47 +29,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SecondActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="fullSensor" />
-        <activity
-            android:name=".ThirdActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".AlarmActivity2"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-        <receiver
-            android:name=".AlarmService_Receiver"
-            android:enabled="true"
-            android:exported="true"/>
-        <activity android:name=".AlarmActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".BaseActivity"/>
-        <activity android:name=".preferences.AlarmPreferencesActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".alert.AlarmAlertActivity"/>
+        <activity
+            android:name=".AlarmActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".BaseActivity" />
+        <activity
+            android:name=".preferences.AlarmPreferencesActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".alert.AlarmAlertActivity" />
 
         <service
-            android:process="eu.kudan.ar.serviceProcess"
-            android:name="eu.kudan.ar.service.AlarmService"
-            android:label="@string/app_name"/>
+            android:name=".service.AlarmService"
+            android:label="@string/app_name"
+            android:process="com.ngost.easyjin.serviceProcess" />
 
-        <receiver android:name="eu.kudan.ar.service.AlarmServiceBroadcastReciever" >
+        <receiver android:name=".service.AlarmServiceBroadcastReciever">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name="eu.kudan.ar.alert.AlarmAlertBroadcastReciever" >
-        </receiver>
-        <receiver android:name = "eu.kudan.ar.telephony.PhoneStateChangedBroadcastReciever">
+        <receiver android:name=".alert.AlarmAlertBroadcastReciever"></receiver>
+        <receiver android:name=".telephony.PhoneStateChangedBroadcastReciever">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".alert.AlarmAlertActivityAR"></activity>
     </application>
 
 </manifest>

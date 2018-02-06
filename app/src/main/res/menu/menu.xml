@@ -47,5 +47,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:title="@string/menu_item_report"
         android:icon="@drawable/glyphicons_340_globe">
     </item>
-
+    <item
+        android:id="@+id/menu_item_license"
+        android:title="License"/>
 </menu>

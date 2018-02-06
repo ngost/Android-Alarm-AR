@@ -17,7 +17,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#E0F7FA"
-    tools:context=".AlarmActivity" >
+    tools:context="com.ngost.easyjin.AlarmActivity" >
 <LinearLayout
     android:orientation="vertical"
     android:layout_weight="1"

@@ -11,11 +11,11 @@
 
     <!-- Menu -->
     <string name="menu_item_new">New</string>
-    <string name="menu_item_save">Save</string>
-    <string name="menu_item_delete">Cancel</string>
-    <string name="menu_item_rate">Rate on Google Play</string>
-    <string name="menu_item_website">Website</string>
-    <string name="menu_item_report">Report a Bug</string>
+    <string name="menu_item_save">저장</string>
+    <string name="menu_item_delete">취소</string>
+    <string name="menu_item_rate">평점 남기기</string>
+    <string name="menu_item_website">블로그 방문</string>
+    <string name="menu_item_report">버그 리포트</string>
 
     <!-- Alert -->
     <string name="_0">0</string>
@@ -29,7 +29,7 @@
     <string name="_8">8</string>
     <string name="_9">9</string>
     <string name="decimal_button_text">,</string>
-    <string name="clear_button_text">Clear</string>
+    <string name="clear_button_text">제출</string>
     <string name="minus_button_text">-</string>
 
 
@@ -40,6 +40,6 @@
     <string name="cancel">Cancel</string>
     <string name="permissionDeninedMsg">거절하신 권한이 있어요. 앱 동작에 문제가 있을 수 있답니다... ㅠ</string>
     <string name="permissionAccepted">권한을 승인하셨네요!</string>
-    <string name="marker_generate_msg1">마커가 등록되어있지 않습니다.\n마커를 등록 해주세요.</string>
+    <string name="marker_generate_msg1">마커가 등록되어있지 않습니다.\n아이콘을 터치하여 마커를 등록 해주세요.</string>
     <string name="marker_generate_msg2">마커가 등록되었습니다.\n(프리뷰 보기)</string>
 </resources>

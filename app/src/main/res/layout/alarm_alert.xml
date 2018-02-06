@@ -12,6 +12,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 -->
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#E0F7FA"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -52,6 +53,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:layout_weight="1" >
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button1"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -60,6 +63,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/_1" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button2"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -68,6 +73,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/_2" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button3"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -78,12 +85,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     </TableRow>
 
     <TableRow
+        android:background="#B2EBF2"
         android:id="@+id/TableRow3"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1" >
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button4"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -92,6 +102,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/_4" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button5"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -100,6 +112,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/_5" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button6"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -116,6 +130,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:layout_weight="1" >
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button7"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -124,6 +140,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/_7" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button8"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -132,6 +150,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/_8" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button9"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -142,12 +162,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     </TableRow>
 
     <TableRow
+
         android:id="@+id/tableRow5"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1" >
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button_decimal"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -156,6 +179,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/decimal_button_text" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button0"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -164,6 +189,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
             android:text="@string/_0" />
 
         <Button
+            android:textSize="30dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button_minus"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -179,6 +206,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:layout_height="wrap_content" >
 
         <Button
+            android:textSize="15dp"
+            android:background="#B2EBF2"
             android:id="@+id/Button_clear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
