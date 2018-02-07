@@ -27,7 +27,7 @@ public class AlarmAlertBroadcastReciever extends BroadcastReceiver {
 				context,
 				AlarmServiceBroadcastReciever.class);
 		context.sendBroadcast(mathAlarmServiceIntent, null);
-		
+//
 		StaticWakeLock.lockOn(context);
 		//Bundle bundle = intent.getExtras();
 		//Log.d("intent",bundle.getSerializable("alarm"))
@@ -42,7 +42,7 @@ public class AlarmAlertBroadcastReciever extends BroadcastReceiver {
 			//switch ()
 			switch (alarm.getAlertway().toString()){
 				case "수학문제":
-
+					Log.e("alertReciver","come");
 					mathAlarmAlertActivityIntent = new Intent(context, AlarmAlertActivity.class);
 
 					mathAlarmAlertActivityIntent.putExtra("alarm", alarm);

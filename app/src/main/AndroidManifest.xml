@@ -13,14 +13,19 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
+
+
     <application
+        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:icon="@mipmap/my_launcher_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/my_launcher_icon"
         android:supportsRtl="true"
+        android:name=".AlarmAplication"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:screenOrientation="portrait"
             android:name=".LogoActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
@@ -32,9 +37,12 @@
 
         <activity
             android:name=".AlarmActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".BaseActivity" />
+        <activity android:name=".BaseActivity"
+            android:screenOrientation="portrait"/>
         <activity
+            android:screenOrientation="portrait"
             android:name=".preferences.AlarmPreferencesActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".alert.AlarmAlertActivity" />
@@ -42,7 +50,7 @@
         <service
             android:name=".service.AlarmService"
             android:label="@string/app_name"
-            android:process="com.ngost.easyjin.serviceProcess" />
+            android:process=":remote" />
 
         <receiver android:name=".service.AlarmServiceBroadcastReciever">
             <intent-filter>

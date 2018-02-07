@@ -22,6 +22,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:layout_height="wrap_content" >
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/textView1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -37,6 +38,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:layout_weight="1" >
 
         <TextView
+
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

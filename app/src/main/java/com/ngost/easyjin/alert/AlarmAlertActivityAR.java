@@ -1,6 +1,10 @@
 package com.ngost.easyjin.alert;
 
 import com.ngost.easyjin.R;
+
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
@@ -44,6 +48,7 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         final Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
@@ -244,6 +249,7 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
 
     @Override
     protected void onDestroy() {
+
         try {
             if (vibrator != null)
                 vibrator.cancel();
@@ -278,6 +284,7 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
             } catch (Exception e) {
 
             }
+
             this.finish();
         }
     }

@@ -64,7 +64,7 @@ public abstract class BaseActivity  extends ActionBarActivity implements android
 		switch (item.getItemId()) {
 		case R.id.menu_item_license:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("라이센스").setMessage("ㅇㅋ").setCancelable(false).setPositiveButton("끄기", new DialogInterface.OnClickListener() {
+			builder.setTitle("라이센스").setMessage(getResources().getString(R.string.license)).setCancelable(false).setPositiveButton("끄기", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.cancel();
@@ -77,7 +77,7 @@ public abstract class BaseActivity  extends ActionBarActivity implements android
 			startActivity(newAlarmIntent);
 			break;
 		case R.id.menu_item_rate:
-			url = "http://ngost.tistory.com";// + getPackageName();
+			url = "market://details?id=" + getPackageName();
 			intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
 			try {

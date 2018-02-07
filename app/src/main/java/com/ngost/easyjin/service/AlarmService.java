@@ -23,10 +23,12 @@ import com.ngost.easyjin.database.Database;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 
 public class AlarmService extends Service {
@@ -65,7 +67,7 @@ public class AlarmService extends Service {
 				
 		Database.init(getApplicationContext());
 		List<Alarm> alarms = Database.getAll();
-		
+
 		for(Alarm alarm : alarms){
 			if(alarm.getAlarmActive())
 				alarmQueue.add(alarm);
@@ -84,6 +86,8 @@ public class AlarmService extends Service {
 	@Override
 	public void onDestroy() {
 		Database.deactivate();
+		Log.d("distroyed","...service");
+
 		super.onDestroy();
 	}
 
@@ -97,10 +101,12 @@ public class AlarmService extends Service {
 		Log.d(this.getClass().getSimpleName(),"onStartCommand()");
 		Alarm alarm = getNext();
 		if(null != alarm){
+			Log.e("service","alam is not null");
 			alarm.schedule(getApplicationContext());
 			Log.d(this.getClass().getSimpleName(),alarm.getTimeUntilNextAlarmMessage());
-			
+			Log.d("service","start");
 		}else{
+			Log.e("service","alam is null");
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("alarm",alarm);
 
@@ -109,10 +115,11 @@ public class AlarmService extends Service {
 			
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, myIntent,PendingIntent.FLAG_CANCEL_CURRENT);			
 			AlarmManager alarmManager = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-			
 			alarmManager.cancel(pendingIntent);
 		}
 		return START_NOT_STICKY;
 	}
+
+
 
 }

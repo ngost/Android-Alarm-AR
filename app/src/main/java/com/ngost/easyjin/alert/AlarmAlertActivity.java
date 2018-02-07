@@ -14,7 +14,10 @@ package com.ngost.easyjin.alert;
 import com.ngost.easyjin.Alarm;
 import com.ngost.easyjin.R;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -24,6 +27,7 @@ import android.os.Vibrator;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.HapticFeedbackConstants;
@@ -31,6 +35,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import static android.view.KeyEvent.KEYCODE_PAGE_UP;
 
 public class AlarmAlertActivity extends Activity implements OnClickListener {
 
@@ -47,7 +53,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 	private TextView problemView;
 	private TextView answerView;
 	private String answerString;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -179,6 +185,20 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 		}
 
 	}
+	public  void volumeUp(){
+		AudioManager am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+		// 현재 볼륨 가져오기
+		int volume = am.getStreamVolume(AudioManager.STREAM_ALARM);
+		// volume이 15보다 작을 때만 키우기 동작
+
+		if(volume <= 15) {
+			am.setStreamVolume(AudioManager.STREAM_ALARM, 15, AudioManager.STREAM_ALARM);
+		}else {
+		}
+
+	}
+
+
 
 	/*
 	 * (non-Javadoc)
@@ -191,11 +211,39 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 			super.onBackPressed();
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		switch (keyCode){
+			case KeyEvent.KEYCODE_APP_SWITCH:
+				Log.d("key","SWITCH CODE");
+				break;
+			case KeyEvent.FLAG_VIRTUAL_HARD_KEY:
+				Log.d("key","HARDKEY CODE");
+				break;
+			case KeyEvent.KEYCODE_VOLUME_DOWN:
+				volumeUp();
+				Log.d("key","VOLUME CODE");
+				break;
+			case KeyEvent.KEYCODE_SOFT_LEFT:
+				Log.d("key","SOFTLEFT CODE");
+				break;
+			case KeyEvent.KEYCODE_SOFT_RIGHT:
+				Log.d("key","SOFTRIGHT CODE");
+				break;
+			case KeyEvent.KEYCODE_PAGE_UP:
+				Log.d("key","PAGE_UP");
+			case KeyEvent.KEYCODE_MENU:
+				Log.d("key","PAGE_UP");
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+
 	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onPause()
-	 */
+         * (non-Javadoc)
+         *
+         * @see android.app.Activity#onPause()
+         */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -251,6 +299,10 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 			answerView.setText(answerBuilder.toString());
 			if (isAnswerCorrect()) {
 				alarmActive = false;
+
+				//SharedPreferences save = getSharedPreferences("alarmActive",0);
+				//Boolean result = save.getBoolean("isCorrect",false);
+				
 				if (vibrator != null)
 					vibrator.cancel();
 				try {
@@ -263,6 +315,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 				} catch (Exception e) {
 
 				}
+
 				this.finish();
 			}
 		}
