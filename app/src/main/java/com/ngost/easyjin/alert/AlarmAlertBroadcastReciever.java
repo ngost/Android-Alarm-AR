@@ -12,7 +12,11 @@
 package com.ngost.easyjin.alert;
 
 import com.ngost.easyjin.Alarm;
+import com.ngost.easyjin.service.AlarmActiveCheckService;
 import com.ngost.easyjin.service.AlarmServiceBroadcastReciever;
+
+import android.app.NotificationManager;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +42,17 @@ public class AlarmAlertBroadcastReciever extends BroadcastReceiver {
 			final Alarm alarm = (Alarm) bundle.getSerializable("alarm");
 			Intent mathAlarmAlertActivityIntent;
 
+			//alarm active check
+			//1. service create
+			Intent activeCheckIntent = new Intent(context, AlarmActiveCheckService.class);
+			//bundle create
+			//put alarm instants and active status into bundle
+			bundle.putBoolean("active",true);
+			//put bundle into intent
+			activeCheckIntent.putExtra("bundle",bundle);
+			//service start
+			context.startService(activeCheckIntent);
+			Log.e("statCheckService","ok");
 
 			//switch ()
 			switch (alarm.getAlertway().toString()){
@@ -47,7 +62,7 @@ public class AlarmAlertBroadcastReciever extends BroadcastReceiver {
 
 					mathAlarmAlertActivityIntent.putExtra("alarm", alarm);
 
-					mathAlarmAlertActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					mathAlarmAlertActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
 					context.startActivity(mathAlarmAlertActivityIntent);
 					break;
@@ -56,7 +71,7 @@ public class AlarmAlertBroadcastReciever extends BroadcastReceiver {
 
 					mathAlarmAlertActivityIntent.putExtra("alarm", alarm);
 
-					mathAlarmAlertActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					mathAlarmAlertActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
 					context.startActivity(mathAlarmAlertActivityIntent);
 					break;

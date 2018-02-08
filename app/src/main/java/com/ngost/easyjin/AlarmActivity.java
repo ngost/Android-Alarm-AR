@@ -62,7 +62,7 @@ public class AlarmActivity extends BaseActivity {
 	final static String MARKER_PATH = "marker";
 	PermissionManager permissionManager = new PermissionManager(this);
 	ImageButton newButton;
-
+	Dialog dialog_pre;
 	String absoultePath;
 	ListView mathAlarmListView;
 	AlarmListAdapter alarmListAdapter;
@@ -73,13 +73,14 @@ public class AlarmActivity extends BaseActivity {
 	String img_path;
 	TextView status;
 	AlertDialog dlg_origin = null;
+	Builder dialog_builder;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_activity);
 		//permission check
 		permissionManager.permissionCheck();
-
+		dialog_pre = new Dialog(this);
 
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -111,10 +112,10 @@ public class AlarmActivity extends BaseActivity {
 			public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 				view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 				final Alarm alarm = (Alarm) alarmListAdapter.getItem(position);
-				Builder dialog = new Builder(AlarmActivity.this);
-				dialog.setTitle("삭제");
-				dialog.setMessage("알람을 삭제하시겠습니까?");
-				dialog.setPositiveButton("Ok", new OnClickListener() {
+				dialog_builder = new Builder(AlarmActivity.this);
+				dialog_builder.setTitle("삭제");
+				dialog_builder.setMessage("알람을 삭제하시겠습니까?");
+				dialog_builder.setPositiveButton("Ok", new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 
@@ -125,14 +126,14 @@ public class AlarmActivity extends BaseActivity {
 						updateAlarmList();
 					}
 				});
-				dialog.setNegativeButton("Cancel", new OnClickListener() {
+				dialog_builder.setNegativeButton("Cancel", new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
 					}
 				});
 
-				dialog.show();
+				dialog_builder.show();
 
 				return true;
 			}
@@ -217,10 +218,10 @@ public class AlarmActivity extends BaseActivity {
 		});
 
 		//마커 프리뷰 다이얼로그
-		final Dialog dialog = new Dialog(this);
-		dialog.setContentView(R.layout.marker_preview_dialog);
-		dialog.setTitle("미리보기");
-		preview_img = (ImageView) dialog.findViewById(R.id.marker_preview);
+
+		dialog_pre.setContentView(R.layout.marker_preview_dialog);
+		dialog_pre.setTitle("미리보기");
+		preview_img = (ImageView) dialog_pre.findViewById(R.id.marker_preview);
 
 		status.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -249,7 +250,7 @@ public class AlarmActivity extends BaseActivity {
 					}else {
 						preview_img.setImageBitmap(bitmap);
 					}
-					dialog.show();
+					dialog_pre.show();
 				}catch (Exception e){
 					status.setText(getResources().getText(R.string.marker_generate_msg1));
 					return;
@@ -288,6 +289,8 @@ public class AlarmActivity extends BaseActivity {
 	protected void onPause() {
 		// setListAdapter(null);
 		Database.deactivate();
+		dlg_origin.dismiss();
+		dialog_pre.dismiss();
 		super.onPause();
 	}
 

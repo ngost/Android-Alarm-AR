@@ -13,6 +13,8 @@ package com.ngost.easyjin.alert;
 
 import com.ngost.easyjin.Alarm;
 import com.ngost.easyjin.R;
+import com.ngost.easyjin.service.AlarmActiveCheckService;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.content.Context;
@@ -23,6 +25,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.Vibrator;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -48,7 +51,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 	private MathProblem mathProblem;
 	private Vibrator vibrator;
 
-	private boolean alarmActive;
+	private boolean alarmActive= true;
 
 	private TextView problemView;
 	private TextView answerView;
@@ -178,6 +181,8 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 				mediaPlayer.prepare();
 				mediaPlayer.start();
 
+
+
 			} catch (Exception e) {
 				mediaPlayer.release();
 				alarmActive = false;
@@ -185,18 +190,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 		}
 
 	}
-	public  void volumeUp(){
-		AudioManager am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-		// 현재 볼륨 가져오기
-		int volume = am.getStreamVolume(AudioManager.STREAM_ALARM);
-		// volume이 15보다 작을 때만 키우기 동작
 
-		if(volume <= 15) {
-			am.setStreamVolume(AudioManager.STREAM_ALARM, 15, AudioManager.STREAM_ALARM);
-		}else {
-		}
-
-	}
 
 
 
@@ -214,26 +208,11 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode){
-			case KeyEvent.KEYCODE_APP_SWITCH:
-				Log.d("key","SWITCH CODE");
-				break;
-			case KeyEvent.FLAG_VIRTUAL_HARD_KEY:
-				Log.d("key","HARDKEY CODE");
-				break;
 			case KeyEvent.KEYCODE_VOLUME_DOWN:
-				volumeUp();
+				VolumeManager volumeManager = new VolumeManager(this);
+				volumeManager.volumeUp();
 				Log.d("key","VOLUME CODE");
 				break;
-			case KeyEvent.KEYCODE_SOFT_LEFT:
-				Log.d("key","SOFTLEFT CODE");
-				break;
-			case KeyEvent.KEYCODE_SOFT_RIGHT:
-				Log.d("key","SOFTRIGHT CODE");
-				break;
-			case KeyEvent.KEYCODE_PAGE_UP:
-				Log.d("key","PAGE_UP");
-			case KeyEvent.KEYCODE_MENU:
-				Log.d("key","PAGE_UP");
 		}
 
 		return super.onKeyDown(keyCode, event);
@@ -268,6 +247,9 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 		} catch (Exception e) {
 
 		}
+
+		Log.d("alertActivity","destroy called");
+
 		super.onDestroy();
 	}
 
@@ -299,10 +281,12 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 			answerView.setText(answerBuilder.toString());
 			if (isAnswerCorrect()) {
 				alarmActive = false;
+				Intent activeCheckIntent = new Intent(this, AlarmActiveCheckService.class);
+				stopService(activeCheckIntent);
 
 				//SharedPreferences save = getSharedPreferences("alarmActive",0);
 				//Boolean result = save.getBoolean("isCorrect",false);
-				
+
 				if (vibrator != null)
 					vibrator.cancel();
 				try {
@@ -315,8 +299,9 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 				} catch (Exception e) {
 
 				}
-
 				this.finish();
+				System.runFinalizersOnExit(true);
+				System.exit(0);
 			}
 		}
 		if (answerView.getText().length() >= answerString.length()
@@ -338,6 +323,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 			e.printStackTrace();
 			return false;
 		}
+
 		return correct;
 	}
 

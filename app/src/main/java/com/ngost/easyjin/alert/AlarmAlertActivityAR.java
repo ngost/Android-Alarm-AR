@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,6 +28,8 @@ import android.widget.Toast;
 import java.io.File;
 
 import com.ngost.easyjin.Alarm;
+import com.ngost.easyjin.service.AlarmActiveCheckService;
+
 import eu.kudan.kudan.ARActivity;
 import eu.kudan.kudan.ARImageTrackable;
 import eu.kudan.kudan.ARImageTrackableListener;
@@ -272,6 +276,9 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
     public void endAlarm(){
         if (isAnswerCorrect()) {
             alarmActive = false;
+            Intent activeCheckIntent = new Intent(this, AlarmActiveCheckService.class);
+            stopService(activeCheckIntent);
+
             if (vibrator != null)
                 vibrator.cancel();
             try {
@@ -286,7 +293,21 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
             }
 
             this.finish();
+            System.runFinalizersOnExit(true);
+            System.exit(0);
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                VolumeManager volumeManager = new VolumeManager(this);
+                volumeManager.volumeUp();
+                Log.d("key","VOLUME CODE");
+                break;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     public boolean isAnswerCorrect(){
