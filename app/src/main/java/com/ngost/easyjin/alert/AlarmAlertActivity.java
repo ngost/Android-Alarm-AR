@@ -226,7 +226,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		StaticWakeLock.lockOff(this);
+		StaticWakeLock.lockOff();
 	}
 
 	@Override
@@ -299,6 +299,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 				} catch (Exception e) {
 
 				}
+				StaticWakeLock.lockOff();
 				this.finish();
 				System.runFinalizersOnExit(true);
 				System.exit(0);

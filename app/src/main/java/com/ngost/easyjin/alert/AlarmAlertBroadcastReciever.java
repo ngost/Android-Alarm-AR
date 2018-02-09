@@ -27,12 +27,15 @@ public class AlarmAlertBroadcastReciever extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		StaticWakeLock wakeLock = new StaticWakeLock();
+		wakeLock.lockOn(context);
+
 		Intent mathAlarmServiceIntent = new Intent(
 				context,
 				AlarmServiceBroadcastReciever.class);
 		context.sendBroadcast(mathAlarmServiceIntent, null);
 //
-		StaticWakeLock.lockOn(context);
+
 		//Bundle bundle = intent.getExtras();
 		//Log.d("intent",bundle.getSerializable("alarm"))
 

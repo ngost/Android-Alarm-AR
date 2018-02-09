@@ -178,25 +178,24 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
 
         /* 모델 파일 테스트 */
         ARModelImporter arModelImporter = new ARModelImporter();
-        arModelImporter.loadFromAsset("ben.jet");
+        arModelImporter.loadFromAsset("moon.jet");
         ARModelNode node3d = arModelImporter.getNode();
         node3d.setName("Cow");
         node3d.rotateByDegrees(90.0f,1.0f,0.0f,0.0f);
         node3d.rotateByDegrees(180.0f,1.0f,100.0f,0.0f);
         ARTexture2D texture2D = new ARTexture2D();
-        texture2D.loadFromAsset("bigBenTexture.png");
+        texture2D.loadFromAsset("moon.jpg");
         ARLightMaterial material = new ARLightMaterial();
         material.setTexture(texture2D);
-        //     material.setColour(1,1,1);
-        material.setAmbient(0.8f,0.8f,0.8f);
+        material.setColour(1,1,1);
+        material.setAmbient(0.8f,0.8f,0.8f);//조명
 
         for(ARMeshNode meshNode : arModelImporter.getMeshNodes()){
             meshNode.setMaterial(material);
         }
-        node3d.scaleByUniform(0.24f);
+        node3d.scaleByUniform(3);
 
         imageTrackable.getWorld().addChild(node3d);
-
         imageTrackable.addListener(new ARImageTrackableListener() {
             @Override
             public void didDetect(ARImageTrackable arImageTrackable) {
@@ -248,7 +247,7 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
     @Override
     protected void onPause() {
         super.onPause();
-        StaticWakeLock.lockOff(this);
+        StaticWakeLock.lockOff();
     }
 
     @Override
@@ -291,7 +290,7 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
             } catch (Exception e) {
 
             }
-
+            StaticWakeLock.lockOff();
             this.finish();
             System.runFinalizersOnExit(true);
             System.exit(0);

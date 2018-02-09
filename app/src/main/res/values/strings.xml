@@ -3,7 +3,7 @@
     <color name="holo_blue_light">#ff33b5e5</color>
 
     <!-- Math Alarm Activity -->
-    <string name="app_name">일어나</string>
+    <string name="app_name">알라미AR</string>
     <string name="title_activity_set_alarms">Set Alarm</string>
     <string name="no_alarms">설정된 알람이 없어요!</string>
 
