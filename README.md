@@ -1,5 +1,5 @@
 -------------------------------------
-AR 알람 어플리케이션 첫 프로젝트 시작
+AR Alarm aplication. my first git project started.
 -----
 Playstore
 https://play.google.com/store/apps/details?id=com.ngost.easyjin
@@ -13,7 +13,10 @@ I use Kudan SDK Free License.
 
 so, If you want to use this project, you should put this project's license key in Project's ApiSingletone Class and modifying the package's name like this. -> com.ngost.easyjin ->> eu.kudan.ar
 
-Thank you. Another questions -> hm5207@gmail.com or visit https://ngost.tistory.com 
+Thank you.
+
+P.S
+Another questions -> hm5207@gmail.com or visit https://ngost.tistory.com 
 -----
 license
 https://github.com/SheldonNeilson/Android-Alarm-Clock
