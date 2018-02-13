@@ -178,13 +178,13 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
 
         /* 모델 파일 테스트 */
         ARModelImporter arModelImporter = new ARModelImporter();
-        arModelImporter.loadFromAsset("moon.jet");
+        arModelImporter.loadFromAsset("ben.jet");
         ARModelNode node3d = arModelImporter.getNode();
         node3d.setName("Cow");
         node3d.rotateByDegrees(90.0f,1.0f,0.0f,0.0f);
         node3d.rotateByDegrees(180.0f,1.0f,100.0f,0.0f);
         ARTexture2D texture2D = new ARTexture2D();
-        texture2D.loadFromAsset("moon.jpg");
+        texture2D.loadFromAsset("bigBenTexture.png");
         ARLightMaterial material = new ARLightMaterial();
         material.setTexture(texture2D);
         material.setColour(1,1,1);
@@ -193,7 +193,7 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
         for(ARMeshNode meshNode : arModelImporter.getMeshNodes()){
             meshNode.setMaterial(material);
         }
-        node3d.scaleByUniform(3);
+        node3d.scaleByUniform(0.5f);
 
         imageTrackable.getWorld().addChild(node3d);
         imageTrackable.addListener(new ARImageTrackableListener() {
