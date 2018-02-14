@@ -26,6 +26,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import com.ngost.easyjin.Alarm;
 import com.ngost.easyjin.service.AlarmActiveCheckService;
@@ -48,7 +52,11 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
     private Vibrator vibrator;
     private boolean alarmActive;
     LinearLayout linearLayout;
-
+    String[] modelInfo = getRandomModel();
+    String[] randomString = new String[]{"헬기","시계탑","달","해","빵","승용차","트럭","음료수","콜라","사이다","몬스터","엉덩이","강아지집","큐브","망치","호두","콩","사람","우주비행사","괴물","과일","무지개","집"};
+    TextView exam1;
+    TextView exam2;
+    TextView exam3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +77,15 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
 
         setContentView(R.layout.activity_alarm_alert_ar);
         linearLayout = (LinearLayout) findViewById(R.id.examLin);
+        exam1 = (TextView) findViewById(R.id.example1);
+        exam2 = (TextView) findViewById(R.id.example2);
+        exam3 = (TextView) findViewById(R.id.example3);
 
+
+
+        exam1.setOnClickListener(this);
+        exam2.setOnClickListener(this);
+        exam3.setOnClickListener(this);
 
         SharedPreferences preferences = getSharedPreferences("marker",0);
         path = preferences.getString("path",null);
@@ -110,12 +126,8 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
 
         startAlarm();
 
-        TextView exam1 = (TextView) findViewById(R.id.example1);
-        TextView exam2 = (TextView) findViewById(R.id.example2);
-        TextView exam3 = (TextView) findViewById(R.id.example3);
-        exam1.setOnClickListener(this);
-        exam2.setOnClickListener(this);
-        exam3.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -125,15 +137,31 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
 
         switch (v.getId()){
             case R.id.example1:
-                endAlarm();
-                break;
-            case R.id.example2:
-                Toast.makeText(getApplicationContext(),"틀렸어",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.example3:
-                Toast.makeText(getApplicationContext(),"틀렸어",Toast.LENGTH_SHORT).show();
-                break;
+                if(exam1.getText().equals(modelInfo[3])){
+                    endAlarm();
+                    break;
+                }else {
+                    Toast.makeText(getApplicationContext(),"틀렸어요.",Toast.LENGTH_SHORT).show();
+                    break;
+                }
 
+            case R.id.example2:
+                if(exam2.getText().equals(modelInfo[3])){
+                    endAlarm();
+                    break;
+                }else {
+                    Toast.makeText(getApplicationContext(),"틀렸어요.",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+            case R.id.example3:
+                if(exam3.getText().equals(modelInfo[3])){
+                    endAlarm();
+                    break;
+                }else {
+                    Toast.makeText(getApplicationContext(),"틀렸어요.",Toast.LENGTH_SHORT).show();
+                    break;
+                }
         }
 
     }
@@ -141,76 +169,114 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
     @Override
     public void setup()
     {
+        //Quiz temp
+        Random rm = new Random();
+        int one = rm.nextInt(randomString.length);
+        int two = rm.nextInt(randomString.length);
 
-        switch (alarm.getDifficulty()) {
-            //do 난이도체크
-            case EASY:
-                break;
-            case MEDIUM:
-                break;
-            case HARD:
-                break;
+        if(one==two){
+            two = rm.nextInt(randomString.length);
         }
 
-        //step1, 추적 가능한 이미지를 등록해라. 여기서 해야 할 일은 Trackable 객체 만들기, Tracker 생성
-        ARImageTrackable imageTrackable;
-        //이름지정
-        imageTrackable = new ARImageTrackable("Lego Marker");
-        //에셋에서 이미지 로딩
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),"kudan");
-        Log.d("123123",file.getAbsolutePath());
-        if(path!=null){
-            imageTrackable.loadFromPath(path);
-        }else {
-            Toast.makeText(getApplicationContext(),"마커를 먼저 등록해주세요.",Toast.LENGTH_LONG).show();
-            finish();
-        }
+        List<String> solution = new ArrayList<>();
+        solution.add(randomString[one]);
+        solution.add(randomString[two]);
+        solution.add(modelInfo[3]);
 
-        // Get the single instance of the image tracker.
-        ARImageTracker imageTracker;
-        //인스턴스생성
-        imageTracker = ARImageTracker.getInstance();
-        //트래커 초기화
-        imageTracker.initialise();
-        imageTracker.addTrackable(imageTrackable);
+        Collections.shuffle(solution);
+        Log.e("solution",solution.get(0));
+        Log.e("solution",solution.get(1));
+        Log.e("solution",solution.get(2));
+        exam1.setText(solution.get(0));
+        exam2.setText(solution.get(1));
+        exam3.setText(solution.get(2));
 
-        //트래커 객체생성
+        try{
+            switch (alarm.getDifficulty()) {
+                //do 난이도체크
+                case EASY:
+                    break;
+                case MEDIUM:
+                    break;
+                case HARD:
+                    break;
+            }
+
+            //step1, 추적 가능한 이미지를 등록해라. 여기서 해야 할 일은 Trackable 객체 만들기, Tracker 생성
+            ARImageTrackable imageTrackable;
+            //이름지정
+            imageTrackable = new ARImageTrackable("Lego Marker");
+            //에셋에서 이미지 로딩
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),"kudan");
+            Log.d("123123",file.getAbsolutePath());
+            if(path!=null){
+                imageTrackable.loadFromPath(path);
+            }else {
+                Toast.makeText(getApplicationContext(),"마커를 먼저 등록해주세요.",Toast.LENGTH_LONG).show();
+                StaticWakeLock.lockOff();
+                this.finish();
+                System.runFinalizersOnExit(true);
+                System.exit(0);
+            }
+
+            // Get the single instance of the image tracker.
+            ARImageTracker imageTracker;
+            //인스턴스생성
+            imageTracker = ARImageTracker.getInstance();
+            //트래커 초기화
+            imageTracker.initialise();
+            imageTracker.addTrackable(imageTrackable);
+
+            //트래커 객체생성
 
         /* 모델 파일 테스트 */
-        ARModelImporter arModelImporter = new ARModelImporter();
-        arModelImporter.loadFromAsset("ben.jet");
-        ARModelNode node3d = arModelImporter.getNode();
-        node3d.setName("Cow");
-        node3d.rotateByDegrees(90.0f,1.0f,0.0f,0.0f);
-        node3d.rotateByDegrees(180.0f,1.0f,100.0f,0.0f);
-        ARTexture2D texture2D = new ARTexture2D();
-        texture2D.loadFromAsset("bigBenTexture.png");
-        ARLightMaterial material = new ARLightMaterial();
-        material.setTexture(texture2D);
-        material.setColour(1,1,1);
-        material.setAmbient(0.8f,0.8f,0.8f);//조명
 
-        for(ARMeshNode meshNode : arModelImporter.getMeshNodes()){
-            meshNode.setMaterial(material);
+
+
+            ARModelImporter arModelImporter = new ARModelImporter();
+            arModelImporter.loadFromAsset(modelInfo[0]);
+            //model info[0]
+            ARModelNode node3d = arModelImporter.getNode();
+            node3d.setName("Cow");
+            node3d.rotateByDegrees(90.0f,1.0f,0.0f,0.0f);
+            node3d.rotateByDegrees(180.0f,1.0f,100.0f,0.0f);
+            ARTexture2D texture2D = new ARTexture2D();
+            texture2D.loadFromAsset(modelInfo[1]);
+            //model info[1]
+            ARLightMaterial material = new ARLightMaterial();
+            material.setTexture(texture2D);
+            material.setColour(1,1,1);
+            material.setAmbient(0.8f,0.8f,0.8f);//조명
+
+            for(ARMeshNode meshNode : arModelImporter.getMeshNodes()){
+                meshNode.setMaterial(material);
+            }
+            node3d.scaleByUniform(Float.parseFloat(modelInfo[2]));
+//Float.parseFloat(modelInfo[2])
+            imageTrackable.getWorld().addChild(node3d);
+            imageTrackable.addListener(new ARImageTrackableListener() {
+                @Override
+                public void didDetect(ARImageTrackable arImageTrackable) {
+                }
+
+                @Override
+                public void didTrack(ARImageTrackable arImageTrackable) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void didLose(ARImageTrackable arImageTrackable) {
+                    linearLayout.setVisibility(View.GONE);
+                }
+            });
+        }catch (NullPointerException e){
+            Log.e("AR-Alert-Setup-method","nullpointException");
+            StaticWakeLock.lockOff();
+            this.finish();
+            System.runFinalizersOnExit(true);
+            System.exit(0);
         }
-        node3d.scaleByUniform(0.5f);
 
-        imageTrackable.getWorld().addChild(node3d);
-        imageTrackable.addListener(new ARImageTrackableListener() {
-            @Override
-            public void didDetect(ARImageTrackable arImageTrackable) {
-            }
-
-            @Override
-            public void didTrack(ARImageTrackable arImageTrackable) {
-                linearLayout.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void didLose(ARImageTrackable arImageTrackable) {
-                linearLayout.setVisibility(View.GONE);
-            }
-        });
     }
 
 
@@ -316,6 +382,22 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         alarmActive = true;
+    }
+
+    public String[] getRandomModel(){
+        ArrayList<String[]> listDummy = new ArrayList();
+        String[] ben = {"ben.jet","bigBenTexture.png","0.5","시계탑"};
+        String[] heli = {"heli.jet","heli.jpg","6","헬기"};
+        String[] moon = {"moon.jet","moon.jpg","8","달"};
+        String[] jeep = {"jeep.jet","jeep.jpg","120","지프트럭"};
+        listDummy.add(ben);
+        listDummy.add(heli);
+        listDummy.add(moon);
+        listDummy.add(jeep);
+
+        Random rand = new Random();
+        String[] result = listDummy.get(rand.nextInt(listDummy.size()));
+        return result;
     }
 
 }

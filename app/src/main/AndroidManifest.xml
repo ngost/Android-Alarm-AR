@@ -39,6 +39,7 @@
         <activity
             android:name=".AlarmActivity"
             android:screenOrientation="portrait"
+            android:configChanges="orientation"
             android:theme="@style/AppTheme" />
 
         <activity android:name=".BaseActivity"
@@ -51,15 +52,17 @@
 
         <activity android:name=".alert.AlarmAlertActivity"
             android:keepScreenOn="true"
+            android:screenOrientation="portrait"
             android:excludeFromRecents="true"/>
 
         <activity android:name=".alert.AlarmAlertActivityAR"
             android:keepScreenOn="true"
+            android:screenOrientation="portrait"
             android:excludeFromRecents="true"/>
 
         <service android:name=".service.AlarmActiveCheckService"
-            android:stopWithTask="false"
-            >
+            android:stopWithTask="false">
+
         </service>
 
         <service

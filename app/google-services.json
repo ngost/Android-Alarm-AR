@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "983119486427",
+    "firebase_url": "https://android-ar-alarm.firebaseio.com",
+    "project_id": "android-ar-alarm",
+    "storage_bucket": "android-ar-alarm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983119486427:android:6452c0763c5b2174",
+        "android_client_info": {
+          "package_name": "com.ngost.easyjin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983119486427-0istqi0j3mhh2jlmclpi9skr21ka145f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoL1qfQBRS4D3ikbGqE-2uLMUACF9Y7Cw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -220,7 +221,6 @@ public class AlarmActivity extends BaseActivity {
 		//마커 프리뷰 다이얼로그
 
 		dialog_pre.setContentView(R.layout.marker_preview_dialog);
-		dialog_pre.setTitle("미리보기");
 		preview_img = (ImageView) dialog_pre.findViewById(R.id.marker_preview);
 
 		status.setOnClickListener(new View.OnClickListener() {
@@ -267,7 +267,7 @@ public class AlarmActivity extends BaseActivity {
 		values.put(MediaStore.Images.Media.TITLE, "marker");
 
 		mlmageCaptureUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-		intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//카메라 가로고정
+		intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//카메라 가로고정
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, mlmageCaptureUri);
 		startActivityForResult(intent, PICK_FROM_CAMERA);
 	}
@@ -350,6 +350,7 @@ public class AlarmActivity extends BaseActivity {
 					getContentResolver().delete(mlmageCaptureUri,null,null);
 				}
 			} catch (NullPointerException e) {
+				Toast.makeText(getApplicationContext(),"마커 생성에 실패하였습니다.",Toast.LENGTH_SHORT).show();
 			}
 
 		} else if (requestCode == PICK_FROM_ALBUM) {
@@ -400,10 +401,18 @@ public class AlarmActivity extends BaseActivity {
 
 	public String getPathFromUri(Uri uri){
 		Cursor cursor = getContentResolver().query(uri, null, null, null, null );
-		cursor.moveToNext();
-		String path = cursor.getString( cursor.getColumnIndex( "_data" ) );
-		cursor.close();
-		return path;
+		if (cursor !=null && cursor.getCount() !=0){
+			try{
+				cursor.moveToNext();
+				String path = cursor.getString( cursor.getColumnIndex( "_data" ) );
+				cursor.close();
+				return path;
+			}catch (CursorIndexOutOfBoundsException e){
+
+			}
+
+		}
+		return null;
 	}
 
 	@Override
