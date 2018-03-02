@@ -7,8 +7,8 @@ android {
         applicationId "com.ngost.easyjin"
         minSdkVersion 18
         targetSdkVersion 25
-        versionCode 8
-        versionName "1.7"
+        versionCode 10
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }

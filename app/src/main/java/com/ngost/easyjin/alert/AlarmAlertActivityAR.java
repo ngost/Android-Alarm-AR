@@ -70,7 +70,11 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
         Bundle bundle = this.getIntent().getExtras();
         alarm = (Alarm) bundle.getSerializable("alarm");
         if(alarm==null){
-            this.setTitle("Alert");
+            Log.e("AlarmAlertActivityAR","alarm null");
+            StaticWakeLock.lockOff();
+            this.finish();
+            System.runFinalizersOnExit(true);
+            System.exit(0);
         }else {
             this.setTitle(alarm.getAlarmName());
         }
@@ -275,7 +279,13 @@ public class AlarmAlertActivityAR extends ARActivity implements View.OnClickList
             this.finish();
             System.runFinalizersOnExit(true);
             System.exit(0);
-        }
+        }catch (RuntimeException e){
+            Log.e("AR-Alert-Setup-method","RuntimeException");
+            StaticWakeLock.lockOff();
+            this.finish();
+            System.runFinalizersOnExit(true);
+            System.exit(0);
+    }
 
     }
 
